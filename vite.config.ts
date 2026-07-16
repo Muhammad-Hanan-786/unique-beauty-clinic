@@ -7,7 +7,6 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     tanstackStart({
-      server: { preset: "github-pages" },
       spa: { enabled: true },
       prerender: { enabled: true, crawlLinks: true },
     }),
