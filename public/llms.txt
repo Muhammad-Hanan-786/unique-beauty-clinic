@@ -1,0 +1,25 @@
+# Unique Beauty Salon
+
+> Luxury hair, bridal, makeup and skincare studio in G-9 Markaz, Islamabad — precision cuts, balayage, keratin, hydra facials and cinematic bridal packages.
+
+Unique Beauty Salon is a full-service beauty studio in Islamabad, Pakistan.
+We specialize in luxury hair care (cutting, colour, keratin, X-Tenso, hair
+botox, extensions), bridal styling for Nikah / Walima / Barat / Mehndi /
+Engagement, HD & airbrush makeup, hydra facials, threading, waxing, and
+mani-pedi rituals.
+
+## Pages
+
+- [Home](/): Studio overview, signature services and current promotions.
+- [Services](/services): Full list of hair, skin, nail and beauty services.
+- [Bridal](/bridal): Bridal makeup packages for Nikah, Walima, Barat, Mehndi and Engagement.
+- [Pricing](/pricing): Transparent price menu across every category.
+- [Gallery](/gallery): Editorial studio work, reels and archive.
+- [Team](/team): Senior stylists and specialists.
+- [About](/about): Studio story, values and location.
+- [Contact](/contact): Address, phone, WhatsApp and directions.
+- [Booking](/booking): Book an appointment online.
+
+## Optional
+
+- [Sitemap](/sitemap.xml)

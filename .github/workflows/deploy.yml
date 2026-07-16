@@ -1,0 +1,74 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      OUT_DIR: ".output/public"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile || bun install
+
+      - name: Build
+        run: bun run build
+        env:
+          # Marker the vite config reads to switch to a static/SPA build for GH Pages.
+          GITHUB_PAGES: "true"
+
+      - name: Prepare static output
+        run: |
+          # nitro static preset outputs the site under .output/public
+          OUT_DIR=".output/public"
+          if [ ! -d "$OUT_DIR" ]; then
+            # Fallback locations if the build preset differs
+            for cand in dist/client dist .output/dist build; do
+              if [ -d "$cand" ]; then OUT_DIR="$cand"; break; fi
+            done
+          fi
+          echo "Using output dir: $OUT_DIR"
+          if [ -f "$OUT_DIR/_shell.html" ] && [ ! -f "$OUT_DIR/index.html" ]; then
+            mv "$OUT_DIR/_shell.html" "$OUT_DIR/index.html"
+          fi
+          # SPA fallback so client-side routes work on refresh / deep links
+          cp "$OUT_DIR/index.html" "$OUT_DIR/404.html" || true
+          # CNAME for custom domain
+          echo "uniquebeautyclinic.com" > "$OUT_DIR/CNAME"
+          # Disable Jekyll (which would strip _files)
+          touch "$OUT_DIR/.nojekyll"
+          echo "OUT_DIR=$OUT_DIR" >> "$GITHUB_ENV"
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.OUT_DIR }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
