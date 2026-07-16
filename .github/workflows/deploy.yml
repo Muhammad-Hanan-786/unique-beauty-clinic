@@ -53,8 +53,6 @@ jobs:
           fi
           # SPA fallback so client-side routes work on refresh / deep links
           cp "$OUT_DIR/index.html" "$OUT_DIR/404.html" || true
-          # CNAME for custom domain
-          echo "uniquebeautyclinic.com" > "$OUT_DIR/CNAME"
           # Disable Jekyll (which would strip _files)
           touch "$OUT_DIR/.nojekyll"
           echo "OUT_DIR=$OUT_DIR" >> "$GITHUB_ENV"
