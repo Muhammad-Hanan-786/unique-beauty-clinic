@@ -32,10 +32,7 @@ jobs:
         run: npm ci || npm install
 
       - name: Build
-        run: npm run build
-        env:
-          # Marker the vite config reads to switch to a static/SPA build for GH Pages.
-          GITHUB_PAGES: "true"
+        run: npm run build:pages
 
       - name: Prepare static output
         run: |

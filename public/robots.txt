@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://unique-beauty-clinic.lovable.app/sitemap.xml
+Sitemap: /sitemap.xml
