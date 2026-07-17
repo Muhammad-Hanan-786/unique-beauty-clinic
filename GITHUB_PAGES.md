@@ -27,7 +27,7 @@ Client-side routing works because the workflow copies `index.html` → `404.html
 
 ## Build output
 
-The workflow uploads whichever of these exists (in order): `.output/public`, `dist`, `.output/dist`, `build`.
+The workflow uploads whichever of these exists (in order): `.output/public`, `dist/client`, `dist`, `.output/dist`, `build`.
 
 If the current TanStack Start build doesn't produce a fully static output on your machine, you can force SPA mode locally by editing `vite.config.ts`:
 
@@ -41,4 +41,4 @@ export default defineConfig({
 });
 ```
 
-Then run `bun run build` and inspect the output folder.
+Then run `npm run build:pages` and inspect the output folder.
